@@ -12,13 +12,13 @@ export const INITIAL_STATE = {
   isAuthenticated: true,
   user: {
     id: 1,
-    name: 'Test User'
+    name: 'Test User',
   },
   categories: [
     {
       id: 'C1',
-      name: 'cheese'
-    }
+      name: 'cheese',
+    },
   ],
   subcategories: [
     // {
@@ -39,9 +39,9 @@ export const INITIAL_STATE = {
       ancestors: {
         user: 1,
         category: 'C1',
-        subcategory: 'S1'
+        subcategory: 'S1',
       },
-      parent: 'S1'
-    }
-  ]
+      parent: 'S1',
+    },
+  ],
 };

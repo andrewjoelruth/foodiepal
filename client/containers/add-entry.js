@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addEntryRequest } from '../actions';
 import Rater from 'react-rater';
 
+import { addEntryRequest } from '../actions';
+
 class AddEntry extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -14,72 +15,70 @@ class AddEntry extends Component {
       rating: 0,
       categoryID: this.props.current.category.id,
       subcategoryID: this.props.current.subcategory.id,
-      userID: this.props.current.user.id
+      userID: this.props.current.user.id,
     };
-
 
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onNotesChange = this.onNotesChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  closeModal() {
+  closeModal () {
     this.props.removeModal();
   }
 
-  onTypeChange(event) {
+  onTypeChange (event) {
     this.setState({ type: event.target.value });
   }
 
-  onNotesChange(event) {
+  onNotesChange (event) {
     this.setState({ notes: event.target.value });
   }
 
-  onRating(rating, lastRating) {
+  onRating (rating, lastRating) {
     if (lastRating !== undefined) {
       this.setState({ rating: rating });
     }
   }
 
-
-  onFormSubmit(event) {
+  onFormSubmit (event) {
     event.preventDefault();
 
     this.props.addEntryRequest(this.state);
     this.closeModal();
   }
 
-  render() {
+  render () {
     return (
-      <div className='modal-form-container'>
+      <div className="modal-form-container">
         <form onSubmit={ this.onFormSubmit }>
-          <input 
+          <input
             value={ this.state.type }
             onChange={ this.onTypeChange }
             type="text"
             placeholder="Type"
           />
-          <textarea 
+          <textarea
             value={ this.state.notes }
             onChange={ this.onNotesChange }
             placeholder="Notes"
           />
           <Rater
             onRate={ this.onRating.bind(this) }
-            interactive={true}
+            interactive={ true }
           />
-          <button type="submit" className='btn btn-primary'>Add Entry</button>
+          <button type="submit" className="btn btn-primary">Add Entry</button>
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({ addEntryRequest }, dispatch);
 }
 

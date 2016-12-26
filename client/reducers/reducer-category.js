@@ -28,37 +28,36 @@ import {
 // }]
 const INITIAL_STATE = [];
 
-export default function(state = INITIAL_STATE, action) {
-  switch(action.type) {
-  case ADD_CATEGORY_REQUEST:
-    return state;
-  case ADD_CATEGORY_SUCCESS:
-    return action.payload;
-  case ADD_CATEGORY_FAILURE:
-    return state;
+export default function (state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case ADD_CATEGORY_REQUEST:
+      return state;
+    case ADD_CATEGORY_SUCCESS:
+      return action.payload;
+    case ADD_CATEGORY_FAILURE:
+      return state;
 
+    case EDIT_CATEGORY_REQUEST:
+      return state;
+    case EDIT_CATEGORY_SUCCESS:
+      return action.payload;
+    case EDIT_CATEGORY_FAILURE:
+      return state;
 
-  case EDIT_CATEGORY_REQUEST:
-    return state;
-  case EDIT_CATEGORY_SUCCESS:
-    return action.payload;
-  case EDIT_CATEGORY_FAILURE:
-    return state;
+    case DELETE_CATEGORY_REQUEST:
+      return state;
+    case DELETE_CATEGORY_SUCCESS:
+      return action.payload;
+    case DELETE_CATEGORY_FAILURE:
+      return state;
 
-  case DELETE_CATEGORY_REQUEST:
-    return state;
-  case DELETE_CATEGORY_SUCCESS:
-    return action.payload;
-  case DELETE_CATEGORY_FAILURE:
-    return state;
-
-  case GET_CATEGORIES_REQUEST:
-    return state;
-  case GET_CATEGORIES_SUCCESS:
-    return action.payload;
-  case GET_CATEGORIES_FAILURE:
-    return state;
-  default:
-    return state;
+    case GET_CATEGORIES_REQUEST:
+      return state;
+    case GET_CATEGORIES_SUCCESS:
+      return action.payload;
+    case GET_CATEGORIES_FAILURE:
+      return state;
+    default:
+      return state;
   }
 }

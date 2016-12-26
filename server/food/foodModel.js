@@ -4,31 +4,31 @@ var mongoose = require('mongoose');
 var CategorySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
 
   ancestors: {
-    user: String
-  }
+    user: String,
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
 // Subcategory Model
 var SubcategorySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
 
   description: String,
 
   ancestors: {
     user: String,
-    category: String
-  }
+    category: String,
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
 // Entry Model
@@ -37,21 +37,21 @@ var EntrySchema = new mongoose.Schema({
 
   notes: {
     type: String,
-    required: true
+    required: true,
   },
 
   rating: {
     type: Number,
-    required: true
+    required: true,
   },
 
   ancestors: {
     user: String,
     category: String,
-    subcategory: String
-  }
+    subcategory: String,
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
 module.exports.Category = mongoose.model('Category', CategorySchema);

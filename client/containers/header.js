@@ -2,90 +2,87 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { logoutRequest, resetPasswordRequest, resetPasswordRedirect } from '../actions/auth';
 import { modal } from 'react-redux-modal';
+
+import { logoutRequest, resetPasswordRequest, resetPasswordRedirect } from '../actions/auth';
 import ShowInfo from '../components/show-info';
 import IconList from '../components/icon-list';
 
 class Header extends Component {
-  componentWillMount() {
+  componentWillMount () {
     this.state = {
       account: {
-        menuActive: false
-      }
+        menuActive: false,
+      },
     };
   }
 
-  constructor(props) {
-    super(props);
-  }
-
-  onAccountClick() {
+  onAccountClick () {
     var activeFlag = this.state.account.menuActive;
 
     this.setState({
       account: {
-        menuActive: !activeFlag
-      }
+        menuActive: !activeFlag,
+      },
     });
   }
 
-  closeAccountDropdown() {
+  closeAccountDropdown () {
     this.setState({
       account: {
-        menuActive: false
-      }
+        menuActive: false,
+      },
     });
   }
 
-  onGetInfo(e) {
+  onGetInfo (e) {
     e.preventDefault();
 
     modal.add(ShowInfo, {
       title: 'Information',
       closeOnOutsideClick: true,
-      hideCloseButton: false
+      hideCloseButton: false,
     });
   }
 
-  onIconList(e) {
+  onIconList (e) {
     e.preventDefault();
     modal.add(IconList, {
       title: 'List Of Icons',
       closeOnOutsideClick: true,
-      hideCloseButton: false
+      hideCloseButton: false,
     });
   }
 
-  onChangeEmailClick() {
+  onChangeEmailClick () {
     // TODO: add modal for change email form
   }
 
-  onResetPasswordRequest() {
+  onResetPasswordRequest () {
     this.props.resetPasswordRedirect(this.props.auth.user._id);
   }
 
-  onLogoutClick() {
+  onLogoutClick () {
     this.props.logoutRequest();
   }
 
-  render() {
+  render () {
     return (
       <nav>
-        <div className='container'>
+        <div className="container">
           { this.props.routing.locationBeforeTransitions.pathname !== '/u' ? <div
-            className='mobile-quick-nav mobile-nav-left'
+            className="mobile-quick-nav mobile-nav-left"
             onClick={ this.context.router.goBack }
-            title='Go back'>
-            <div className='mobile-chevron chevron-left'></div>
-          </div> : <div className='mobile-quick-nav inactive'></div> }
+            title="Go back">
+            <div className="mobile-chevron chevron-left"></div>
+          </div> : <div className="mobile-quick-nav inactive"></div> }
 
-          <div className='portal'>
-            <Link to='/' title='Gourmand'>FoodiePal</Link>
+          <div className="portal">
+            <Link to="/" title="Gourmand">FoodiePal</Link>
           </div>
-          
-          <div className='mobile-quick-nav mobile-nav-right' onClick={ this.onAccountClick.bind(this) }>
-            <ul className='mobile-account-nav' tabIndex="5" onBlur={ this.closeAccountDropdown.bind(this) }>
+
+          <div className="mobile-quick-nav mobile-nav-right" onClick={ this.onAccountClick.bind(this) }>
+            <ul className="mobile-account-nav" tabIndex="5" onBlur={ this.closeAccountDropdown.bind(this) }>
               <li>
                 <ul className={ `mobile-account-subnav ${ this.state.account.menuActive ? 'active' : '' }` }>
                   <li onClick={ this.onGetInfo.bind(this) }>Info</li>
@@ -96,18 +93,18 @@ class Header extends Component {
               </li>
             </ul>
           </div>
-          <ul className='main-nav'></ul>
+          <ul className="main-nav"></ul>
         </div>
       </nav>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({ logoutRequest, resetPasswordRequest, resetPasswordRedirect }, dispatch);
 }
 

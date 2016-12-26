@@ -6,9 +6,9 @@ module.exports = {
   // the input is the userID, which in this case will be the parent of the categories we want
   getCategories: function (userID) {
     // find the categories with the given userID and return them
-    return Food.Category.find({'ancestors.user': userID}, function(err, categories) {
+    return Food.Category.find({'ancestors.user': userID}, function (err, categories) {
       if (err) {
-        console.log("err in controller getCategories fn: ", err);
+        console.log('err in controller getCategories fn: ', err);
         return err;
       }
       // console.log('TEST IN GETCATAGORIES');
@@ -21,14 +21,14 @@ module.exports = {
     var newCategory = Food.Category({
       name: data.name,
       ancestors: {
-        user: data.userID
-      }
+        user: data.userID,
+      },
     });
-       
+
     // save that new entry to the db, and return whatever its callback returns
-    return newCategory.save(function(err, savedCategory) {
+    return newCategory.save(function (err, savedCategory) {
       if (err) {
-        console.log("err in controller addCategory fn: ", err);
+        console.log('err in controller addCategory fn: ', err);
         return err;
       }
       console.log('Success saving category to db: ', savedCategory);
@@ -39,53 +39,53 @@ module.exports = {
   standardCategories: {
     cheese: {
       name: 'Cheese',
-      userID: null
+      userID: null,
     },
     olives: {
       name: 'Olives',
-      userID: null
+      userID: null,
     },
     chocolate: {
       name: 'Chocolate',
-      userID: null
+      userID: null,
     },
     beer: {
       name: 'Beer',
-      userID: null
+      userID: null,
     },
     wine: {
       name: 'Wine',
-      userID: null
+      userID: null,
     },
     coffee: {
       name: 'Coffee',
-      userID: null
+      userID: null,
     },
     charcuterie: {
       name: 'Charcuterie',
-      userID: null
+      userID: null,
     },
     cocktails: {
       name: 'Cocktails',
-      userID: null
+      userID: null,
     },
     oliveOil: {
       name: 'Olive Oil',
-      userID: null
-    }
+      userID: null,
+    },
   },
 
-  updateCategory: function(category, next) {
+  updateCategory: function (category, next) {
     var query = { _id: category.categoryID };
     var update = {
       name: category.type,
       ancestors: {
-        user: category.userID
-      }
+        user: category.userID,
+      },
     };
-    return Food.Category.update(query, update, function(err, success) {
+    return Food.Category.update(query, update, function (err, success) {
       if (err) {
-        console.log("err in controller updateEntry fn: ", err);
+        console.log('err in controller updateEntry fn: ', err);
         next(err);
         return;
       }
@@ -95,13 +95,13 @@ module.exports = {
     });
   },
 
-  deleteCategory: function(category, next) {
+  deleteCategory: function (category, next) {
     console.log('Inside deletesubcategory Controller: ', category);
     var query = { _id: category.categoryID };
 
-    return Food.Category.remove(query, function(err) {
+    return Food.Category.remove(query, function (err) {
       if (err) {
-        console.log("err in controller delete category fn: ", err);
+        console.log('err in controller delete category fn: ', err);
         next(err);
         return;
       } else {
@@ -116,9 +116,9 @@ module.exports = {
   // the input is the categoryID, which in this case will be the parent of the subcats we want
   getSubcategories: function (categoryID) {
     // find the subcategories with the given categoryID and return them
-    return Food.Subcategory.find({'ancestors.category': categoryID}, function(err, subcategories) {
+    return Food.Subcategory.find({'ancestors.category': categoryID}, function (err, subcategories) {
       if (err) {
-        console.log("err in controller getSubcategories fn: ", err);
+        console.log('err in controller getSubcategories fn: ', err);
         return err;
       }
       return subcategories;
@@ -132,14 +132,14 @@ module.exports = {
       description: data.description,
       ancestors: {
         user: data.userID,
-        category: data.categoryID
-      }
+        category: data.categoryID,
+      },
     });
-    
+
     // save that new entry to the db, and return whatever its callback returns
-    return newSubcategory.save(function(err, savedSubcategory) {
+    return newSubcategory.save(function (err, savedSubcategory) {
       if (err) {
-        console.log("err in controller addSubcategory fn: ", err);
+        console.log('err in controller addSubcategory fn: ', err);
         return err;
       }
       console.log('Success saving subcategory to db: ', savedSubcategory);
@@ -147,15 +147,15 @@ module.exports = {
     });
   },
 
-  updateSubcategory: function(subcategory, next) {
+  updateSubcategory: function (subcategory, next) {
     var query = { _id: subcategory.subcategoryID };
     var update = {
       name: subcategory.name,
-      description: subcategory.description
+      description: subcategory.description,
     };
-    return Food.Subcategory.update(query, update, function(err, success) {
+    return Food.Subcategory.update(query, update, function (err, success) {
       if (err) {
-        console.log("err in controller updateEntry fn: ", err);
+        console.log('err in controller updateEntry fn: ', err);
         next(err);
         return;
       }
@@ -165,13 +165,13 @@ module.exports = {
     });
   },
 
-  deleteSubcategory: function(subcategory, next) {
+  deleteSubcategory: function (subcategory, next) {
     console.log('Inside deletesubcategory Controller: ', subcategory);
     var query = { _id: subcategory.subcategoryID };
 
-    return Food.Subcategory.remove(query, function(err) {
+    return Food.Subcategory.remove(query, function (err) {
       if (err) {
-        console.log("err in controller delete subcategory fn: ", err);
+        console.log('err in controller delete subcategory fn: ', err);
         next(err);
         return;
       } else {
@@ -186,9 +186,9 @@ module.exports = {
   // the input is the subcategoryID, which in this case will be the parent of the entries we want
   getEntries: function (subcategoryID) {
     // find the entries with the given subcategoryID and return them
-    return Food.Entry.find({'ancestors.subcategory': subcategoryID}, function(err, entries) {
+    return Food.Entry.find({'ancestors.subcategory': subcategoryID}, function (err, entries) {
       if (err) {
-        console.log("err in controller getEntries fn: ", err);
+        console.log('err in controller getEntries fn: ', err);
         return err;
       }
       return entries;
@@ -204,14 +204,14 @@ module.exports = {
       ancestors: {
         user: data.userID,
         category: data.categoryID,
-        subcategory: data.subcategoryID
-      }
+        subcategory: data.subcategoryID,
+      },
     });
-    
+
     // save that new entry to the db, and return whatever its callback returns
-    return newEntry.save(function(err, savedEntry) {
+    return newEntry.save(function (err, savedEntry) {
       if (err) {
-        console.log("err in controller addEntry fn: ", err);
+        console.log('err in controller addEntry fn: ', err);
         return err;
       }
       console.log('Success saving entry to db: ', savedEntry);
@@ -219,18 +219,18 @@ module.exports = {
     });
   },
 
-  updateEntry: function(entry, next) {
+  updateEntry: function (entry, next) {
     console.log('Inside updateEntry Controller: ', entry);
     var query = { _id: entry._id };
     var update = {
       type: entry.type,
       notes: entry.notes,
-      rating: entry.rating
+      rating: entry.rating,
     };
-    return Food.Entry.update(query, update, function(err, success) {
+    return Food.Entry.update(query, update, function (err, success) {
       if (err) {
         next(err);
-        console.log("err in controller updateEntry fn: ", err);
+        console.log('err in controller updateEntry fn: ', err);
         return;
       }
       next(success);
@@ -239,13 +239,13 @@ module.exports = {
     });
   },
 
-  deleteEntry: function(entry, next) {
+  deleteEntry: function (entry, next) {
     console.log('Inside deleteEntry Controller: ', entry);
     var query = { _id: entry._id };
 
-    return Food.Entry.remove(query, function(err) {
+    return Food.Entry.remove(query, function (err) {
       if (err) {
-        console.log("err in controller deleteEntry fn: ", err);
+        console.log('err in controller deleteEntry fn: ', err);
         next(err);
         return;
       } else {
@@ -254,6 +254,6 @@ module.exports = {
         return;
       }
     });
-  }
+  },
 
 };
