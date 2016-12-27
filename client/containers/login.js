@@ -1,15 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import { reduxForm } from 'redux-form';
-import { bindActionCreators } from 'redux';
 
 import Login from '../components/login.js';
 import { loginRequest } from '../actions/auth.js';
 
-
-
 //Client side validation
-function validate(values) {
+function validate (values) {
   var errors = {};
   var hasErrors = false;
 
@@ -27,28 +22,25 @@ function validate(values) {
     errors.password = 'Password is required!';
     hasErrors = true;
   }
-  
+
   return hasErrors && errors;
-} 
+}
 
-
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
-    loginUser: loginRequest
+    loginUser: loginRequest,
   };
-};
+}
 
-function mapStateToProps(state, ownProps) {
-  return { 
+function mapStateToProps (state, ownProps) {
+  return {
     user: state.user,
-    validateFields: state.validateFields
+    validateFields: state.validateFields,
   };
-};
-
+}
 
 export default reduxForm({
   form: 'Login',
   fields: ['email', 'password'],
-  validate 
+  validate,
 }, mapStateToProps, mapDispatchToProps)(Login);
-

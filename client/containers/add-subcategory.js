@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { addSubcategoryRequest } from '../actions';
 
 class AddSubcategory extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
       name: '',
       description: '',
-      categoryID: this.props.current.category.id
+      categoryID: this.props.current.category.id,
     }
 
     this.onNameChange = this.onNameChange.bind(this);
@@ -18,53 +19,52 @@ class AddSubcategory extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  closeModal() {
+  closeModal () {
     this.props.removeModal();
   }
 
-  onNameChange(event) {
+  onNameChange (event) {
     this.setState({ name: event.target.value });
   }
 
-  onDescriptionChange(event) {
+  onDescriptionChange (event) {
     this.setState({ description: event.target.value });
   }
 
-
-  onFormSubmit(event) {
+  onFormSubmit (event) {
     event.preventDefault();
 
     this.props.addSubcategoryRequest(this.state);
     this.closeModal();
   }
 
-  render() {
+  render () {
     return (
-      <div className='modal-form-container'>
+      <div className="modal-form-container">
         <form onSubmit={ this.onFormSubmit }>
-          <input 
+          <input
             value={ this.state.name }
             onChange={ this.onNameChange.bind(this) }
-            type='text'
-            placeholder='Name'
+            type="text"
+            placeholder="Name"
           />
-          <textarea 
+          <textarea
             value={ this.state.description }
             onChange={ this.onDescriptionChange }
-            placeholder='Description'
+            placeholder="Description"
           />
-          <button type='submit' className='btn btn-primary'>Add Variety</button>
+          <button type="submit" className="btn btn-primary">Add Variety</button>
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({ addSubcategoryRequest }, dispatch);
 }
 

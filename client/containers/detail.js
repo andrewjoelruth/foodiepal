@@ -1,56 +1,49 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { modal } from 'react-redux-modal';
+import ReactCSS from 'react-addons-css-transition-group';
+
+import { getCurrentSubcategory, sortEntry } from '../actions/index';
+
 import AddEntry from './add-entry';
 import EntryList from './entry-list';
-import { getCurrentSubcategory, sortEntry } from '../actions/index';
-import ReactCSS from 'react-addons-css-transition-group';
 import EditSubcategory from './edit-subcategory';
 
 class Detail extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  // componentWillMount() {
-  // }
-  
-
-  openEntryForm(subcategory) {
+  openEntryForm (subcategory) {
     modal.add(AddEntry, {
       title: 'Add Entry',
       closeOnOutsideClick: true,
-      hideCloseButton: false
+      hideCloseButton: false,
     });
   }
 
-  openSubcategoryEdit(e, subcategory) {
+  openSubcategoryEdit (e, subcategory) {
     e.preventDefault();
 
     modal.add(EditSubcategory, {
       modalProps: subcategory,
       title: 'Edit Subcategory',
       closeOnOutsideClick: true,
-      hideCloseButton: false
+      hideCloseButton: false,
     });
   }
 
-  sortToggle() {
+  sortToggle () {
     this.props.sortEntry(this.props.entries.sort);
   }
 
-  render() {
+  render () {
     const subcategory = this.props.current.subcategory;
 
     if (subcategory.id === 1) {
       return (
-      <ReactCSS component='div' transitionName="fade-in" transitionAppear={true} transitionAppearTimeout={300} transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-        <div className='container'>
-          <div className='content'>
-            <h6 className='grid-title'>{ this.props.current.category.name } <span className='breadcrumbs-separator'>&rsaquo;</span> { subcategory.name }
+      <ReactCSS component="div" transitionName="fade-in" transitionAppear={ true } transitionAppearTimeout={ 300 } transitionEnterTimeout={ 300 } transitionLeaveTimeout={ 300 }>
+        <div className="container">
+          <div className="content">
+            <h6 className="grid-title">{ this.props.current.category.name } <span className="breadcrumbs-separator">&rsaquo;</span> { subcategory.name }
             </h6>
           </div>
         </div>
@@ -59,19 +52,19 @@ class Detail extends Component {
     }
 
     return (
-      <ReactCSS component='div' transitionName="fade-in" transitionAppear={true} transitionAppearTimeout={300} transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-        <div className='container'>
-          <div className='content'>
-            <h6 className='grid-title'>{ this.props.current.category.name } <span className='breadcrumbs-separator'>&rsaquo;</span> { subcategory.name }
-              <button className='btn-edit' onClick={ (e) => this.openSubcategoryEdit(e, this.props.current) }>Edit {subcategory.name}</button>
+      <ReactCSS component="div" transitionName="fade-in" transitionAppear={ true } transitionAppearTimeout={ 300 } transitionEnterTimeout={ 300 } transitionLeaveTimeout={ 300 }>
+        <div className="container">
+          <div className="content">
+            <h6 className="grid-title">{ this.props.current.category.name } <span className="breadcrumbs-separator">&rsaquo;</span> { subcategory.name }
+              <button className="btn-edit" onClick={ (e) => this.openSubcategoryEdit(e, this.props.current) }>Edit {subcategory.name}</button>
             </h6>
-            <div className='detail-header'>
-              <h1 className='detail-header-title'>{ subcategory.name }</h1>
+            <div className="detail-header">
+              <h1 className="detail-header-title">{ subcategory.name }</h1>
               <p>{ subcategory.description }</p>
-              <button onClick={ this.openEntryForm.bind(this) } className='btn btn-primary'>Add New Entry</button>
+              <button onClick={ this.openEntryForm.bind(this) } className="btn btn-primary">Add New Entry</button>
             </div>
 
-            <button className='btn-edit' onClick={ this.sortToggle.bind(this) }>Sorting by {this.props.entries.sort}</button>
+            <button className="btn-edit" onClick={ this.sortToggle.bind(this) }>Sorting by {this.props.entries.sort}</button>
             <h5>Your History:</h5>
 
             <EntryList />
@@ -82,11 +75,11 @@ class Detail extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({ getCurrentSubcategory, sortEntry }, dispatch);
 }
 

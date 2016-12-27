@@ -3,26 +3,26 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { modal } from 'react-redux-modal';
+
+import { iconList } from '../assets/img/icon-catalogue';
 import {
   getCurrentUser,
   getCategoriesRequest,
-  setCurrentCategory
+  setCurrentCategory,
 } from '../actions';
+
 import AddCategory from './add-category';
-import { iconList } from '../assets/img/icon-catalogue';
-
-
 
 class CategoryList extends Component {
-  componentWillMount() {
+  componentWillMount () {
     this.props.getCategoriesRequest(this.props.current.user.id);
   }
 
-  setCategory(category) {
+  setCategory (category) {
     this.props.setCurrentCategory(category);
   }
 
-  renderCategories() {
+  renderCategories () {
 
     const categories = this.props.categories;
     if (!categories.length) {
@@ -30,7 +30,7 @@ class CategoryList extends Component {
     }
 
     return categories.map((category) => {
-      let categoryClassName = category.name.replace(/(\s+?)/g,"-").toLowerCase();
+      let categoryClassName = category.name.replace(/(\s+?)/g,'-').toLowerCase();
       if (categoryClassName[categoryClassName.length-1] === 's') {
         categoryClassName = categoryClassName.substring(0, categoryClassName.length - 1);
       }
@@ -41,17 +41,17 @@ class CategoryList extends Component {
 
       let categoryInfo = {
         id: category._id,
-        name: category.name
+        name: category.name,
       };
 
       return (
-        <li key={ category._id } className='grid-links-block'>
+        <li key={ category._id } className="grid-links-block">
           <Link
             to={ `u/${ category.name }` }
             onClick={ () => this.setCategory(categoryInfo) }>
             <div className="grid-link-container">
               <div className={ `grid-link-icon grid-link-icon-${ categoryClassName }` }></div>
-              <span className='grid-link-name'>{ category.name }</span>
+              <span className="grid-link-name">{ category.name }</span>
             </div>
           </Link>
         </li>
@@ -59,44 +59,34 @@ class CategoryList extends Component {
     });
   }
 
-  render() {
-    return (
-      <div className='grid-container'>
-        <ul className='grid-links'>
-          { this.renderCategories() }
-        </ul>
-      </div>
-    );
-  }
-
-  openEntryForm(e) {
+  openEntryForm (e) {
     e.preventDefault();
 
     modal.add(AddCategory, {
       title: 'Add New Category',
       closeOnOutsideClick: true,
-      hideCloseButton: false
+      hideCloseButton: false,
     });
   }
 
-  renderAddNewButtonGrid() {
+  renderAddNewButtonGrid () {
     return (
-      <li key='add-subcategory' className='grid-links-block'>
-        <Link to='#' onClick={ this.openEntryForm.bind(this) }>
+      <li key="add-subcategory" className="grid-links-block">
+        <Link to="#" onClick={ this.openEntryForm.bind(this) }>
           <div className="grid-link-container">
-            <div className='grid-link-icon'>+</div>
-            <span className='grid-link-name'>Add New</span>
+            <div className="grid-link-icon">+</div>
+            <span className="grid-link-name">Add New</span>
           </div>
         </Link>
       </li>
     );
   }
 
-  render() {
+  render () {
     return (
-      <div className='grid-container'>
-        <ul className='grid-links'>
-          { !this.props.categories.isFetching ? this.renderCategories() : <div className='spinner'></div> }
+      <div className="grid-container">
+        <ul className="grid-links">
+          { !this.props.categories.isFetching ? this.renderCategories() : <div className="spinner"></div> }
           { !this.props.categories.isFetching ? this.renderAddNewButtonGrid() : '' }
         </ul>
       </div>
@@ -104,17 +94,15 @@ class CategoryList extends Component {
   }
 }
 
-
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({
     getCurrentUser,
     getCategoriesRequest,
-    setCurrentCategory
+    setCurrentCategory,
   }, dispatch);
 }
 

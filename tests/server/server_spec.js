@@ -1,20 +1,19 @@
-var server = require('../../server/server.js');
 var expect = require('../../node_modules/chai/chai').expect;
-var stubs = require('./stubs.js');
 var handler = require('../../server/food/foodRoutes.js');
 
+var stubs = require('./stubs.js');
 
 // Conditional async testing
 // Will wait for test to be truthy before executing callback
-function waitForThen(test, cb) {
-  setTimeout(function() {
+function waitForThen (test, cb) {
+  setTimeout(function () {
     test() ? cb.apply(this) : waitForThen(test, cb);
   }, 5);
 }
 
-describe('Node Server Request Listener Function', function() {
+describe('Node Server Request Listener Function', function () {
 
-  xit('Should answer GET requests for food/foodRoutes with a 200 status code', function() {
+  xit('Should answer GET requests for food/foodRoutes with a 200 status code', function () {
     // This is a fake server request. Normally, the server would provide this,
     // but we want to test our function's behavior totally independent of the server code
     var req = new stubs.request('/api/food', 'GET');
@@ -26,7 +25,7 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-  xit('Should send back parsable stringified JSON', function() {
+  xit('Should send back parsable stringified JSON', function () {
     var req = new stubs.request('/food/foodRoutes', 'GET');
     var res = new stubs.response();
 
@@ -36,7 +35,7 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-  xit('Should send back an object', function() {
+  xit('Should send back an object', function () {
     var req = new stubs.request('/food/foodRoutes', 'GET');
     var res = new stubs.response();
 
@@ -47,7 +46,7 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-  xit('Should send an object containing a `results` array', function() {
+  xit('Should send an object containing a `results` array', function () {
     var req = new stubs.request('/food/foodRoutes', 'GET');
     var res = new stubs.response();
 
@@ -59,10 +58,10 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-  xit('Should accept posts to /food/foodRoutes', function() {
+  xit('Should accept posts to /food/foodRoutes', function () {
     var stubMsg = {
       catagory: 'Cheese',
-      subcatagory: 'Cheddar'
+      subcatagory: 'Cheddar',
     };
     var req = new stubs.request('/food/foodRoutes', 'POST', stubMsg);
     var res = new stubs.response();
@@ -78,10 +77,10 @@ describe('Node Server Request Listener Function', function() {
     expect(res._ended).to.equal(true);
   });
 
-xit('Should respond with messages that were previously posted', function() {
+  xit('Should respond with messages that were previously posted', function () {
     var stubMsg = {
       catagory: 'Cheese',
-      subcatagory: 'Cheddar'
+      subcatagory: 'Cheddar',
     };
     var req = new stubs.request('/food/foodRoutes', 'POST', stubMsg);
     var res = new stubs.response();
@@ -104,8 +103,7 @@ xit('Should respond with messages that were previously posted', function() {
     expect(res._ended).to.equal(true);
   });
 
-
-  xit('Should 404 when asked for a nonexistent file', function() {
+  xit('Should 404 when asked for a nonexistent file', function () {
     var req = new stubs.request('/food/foodRoutes', 'GET');
     var res = new stubs.response();
 
@@ -113,10 +111,10 @@ xit('Should respond with messages that were previously posted', function() {
 
     // Wait for response to return and then check status code
     waitForThen(
-      function() { return res._ended; },
-      function() {
+      function () { return res._ended; },
+      function () {
         expect(res._responseCode).to.equal(404);
-    });
+      });
   });
 
 });
