@@ -766,6 +766,9 @@ footer {
 .grid-link-icon-candy {
   background-image: url('../img/img2/candy.svg');
 }
+.grid-link-icon-canned {
+  background-image: url('../img/img2/tin-can.svg');
+}
 .grid-link-icon-cereal {
   background-image: url('../img/img2/cereals.svg');
 }
@@ -944,7 +947,7 @@ footer {
   background-image: url('../img/img2/butter.svg');
 }
 .grid-link-icon-stout {
-  background-image: url('../img/img2/stout.ico');
+  background-image: url('../img/img2/Stout.ico');
 }
 .grid-link-icon-tea {
   background-image: url('../img/img2/tea.svg');
