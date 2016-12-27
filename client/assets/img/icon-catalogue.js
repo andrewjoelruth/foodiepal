@@ -8,6 +8,7 @@ const iconList = [
   'bread',
   'calamari',
   'candy',
+  'canned',
   'cereal',
   'champagne',
   'charcuterie',
