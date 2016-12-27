@@ -1,27 +1,27 @@
 import axios from 'axios';
-import {
-  setCurrentUser,
-  removeCurrentUser,
-  removeCurrentCategory,
-  removeCurrentSubcategory
-} from './index.js';
 import { push } from 'react-router-redux';
 import { change, reset } from 'redux-form';
 import { toastr, actions as toastrActions } from 'react-redux-toastr';
 
-const API_USER = `/api/user/`;
+import {
+  setCurrentUser,
+  removeCurrentUser,
+  removeCurrentCategory,
+  removeCurrentSubcategory,
+} from './index.js';
+
+const API_USER = '/api/user/';
 const API_ADD_USER = `${API_USER}signup`;
 const API_LOGIN_USER = `${API_USER}login`;
 const API_FORGOTPW_USER = `${API_USER}forgotPassword`;
 const API_RESETPW_USER = `${API_USER}resetPassword`;
-
 
 // For Error
 export const toastrOptions = {
   icon: 'error',
   timeOut: 0,
   showCloseButton: true,
-  removeOnHover: false
+  removeOnHover: false,
 };
 
 // Logout (and other things?)
@@ -29,22 +29,21 @@ export const toastrOptionsDismiss = {
   icon: 'success',
   timeOut: 2000,
   showCloseButton: true,
-  removeOnHover: false
+  removeOnHover: false,
 };
-
 
 // SIGN-UP
 export const ADD_USER_REQUEST = 'ADD_USER_REQUEST';
 export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS';
 export const ADD_USER_FAILURE = 'ADD_USER_FAILURE';
 
-export function addUserRequest(user, dispatch) {
+export function addUserRequest (user, dispatch) {
   return new Promise ((reject, resolve) => {
   //   dispatch(addUser());
     return axios({
       method: 'POST',
       url: API_ADD_USER,
-      data: user
+      data: user,
     })
     .then(response => {
       if (response.status !== 201) {
@@ -73,40 +72,39 @@ export function addUserRequest(user, dispatch) {
   });
 }
 
-export function addUser() {
-  console.log("addUser called");
+export function addUser () {
+  console.log('addUser called');
   return {
-    type: ADD_USER_REQUEST
+    type: ADD_USER_REQUEST,
   };
 }
 
-function addUserSuccess(user) {
+function addUserSuccess (user) {
   return {
     type: ADD_USER_SUCCESS,
-    payload: user
+    payload: user,
   };
 }
 
-function addUserFailure(user) {
+function addUserFailure (user) {
   return {
     type: ADD_USER_FAILURE,
-    payload: user
+    payload: user,
   };
 }
-
 
 // LOGIN
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export function loginRequest(user, dispatch) {
+export function loginRequest (user, dispatch) {
   return new Promise ((reject, resolve) => {
   //   dispatch(login());
     return axios({
       method: 'POST',
       url: API_LOGIN_USER,
-      data: user
+      data: user,
     })
     .then(response => {
       if (response.status !== 200) {
@@ -135,23 +133,23 @@ export function loginRequest(user, dispatch) {
   });
 }
 
-export function login() {
+export function login () {
   return {
-    type: LOGIN_REQUEST
+    type: LOGIN_REQUEST,
   };
 }
 
-function loginSuccess(user) {
+function loginSuccess (user) {
   return {
     type: LOGIN_SUCCESS,
-    payload: user
+    payload: user,
   };
 }
 
-function loginFailure(user) {
+function loginFailure (user) {
   return {
     type: LOGIN_FAILURE,
-    payload: user
+    payload: user,
   };
 }
 
@@ -160,7 +158,7 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-export function logoutRequest() {
+export function logoutRequest () {
   return dispatch => {
     dispatch(logout());
     localStorage.removeItem('jwtToken');
@@ -175,15 +173,15 @@ export function logoutRequest() {
   };
 }
 
-function logout() {
+function logout () {
   return {
-    type: LOGOUT_REQUEST
+    type: LOGOUT_REQUEST,
   };
 }
 
-function logoutSuccess() {
+function logoutSuccess () {
   return {
-    type: LOGOUT_SUCCESS
+    type: LOGOUT_SUCCESS,
   };
 }
 
@@ -192,13 +190,13 @@ export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
 export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE';
 
-export function forgotPasswordRequest(user) {
+export function forgotPasswordRequest (user) {
   return dispatch => {
     dispatch(forgotPassword(user));
     return axios({
       method: 'POST',
       url: API_FORGOTPW_USER,
-      data: user
+      data: user,
     })
     .then(response => {
       if (response.status !== 201) {
@@ -217,27 +215,26 @@ export function forgotPasswordRequest(user) {
   };
 }
 
-function forgotPassword(user) {
+function forgotPassword (user) {
   return {
     type: FORGOT_PASSWORD_REQUEST,
-    payload: user
+    payload: user,
   };
 }
 
-function forgotPasswordSuccess(user) {
+function forgotPasswordSuccess (user) {
   return {
     type: FORGOT_PASSWORD_SUCCESS,
-    payload: user
+    payload: user,
   };
 }
 
-function forgotPasswordFailure(user) {
+function forgotPasswordFailure (user) {
   return {
     type: FORGOT_PASSWORD_FAILURE,
-    payload: user
+    payload: user,
   };
 }
-
 
 // RESET PASSWORD (update user's password in database)
 export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
@@ -247,11 +244,11 @@ export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
 // we need a global variable that resetPasswordRequest can access
 let resetpwUserID;
 // export a function that we can call as a prop on the resetpw component, passing in the userID from the URL where we have access to it (in the component itself on mount)
-export function setUserID(userID) {
+export function setUserID (userID) {
   resetpwUserID = userID;
 }
 
-export function resetPasswordRedirect(userID) {
+export function resetPasswordRedirect (userID) {
   return dispatch => {
     dispatch(logout());
     localStorage.removeItem('jwtToken');
@@ -263,15 +260,14 @@ export function resetPasswordRedirect(userID) {
   };
 }
 
-
-export function resetPasswordRequest(user, dispatch) {
+export function resetPasswordRequest (user, dispatch) {
   // add the userID we got from the forgot pw email URL to the user we send in our POST
   user.userID = resetpwUserID;
   return new Promise ((reject, resolve) => {
     return axios({
       method: 'POST',
       url: API_RESETPW_USER,
-      data: user
+      data: user,
     })
     .then(response => {
       if (response.status !== 201) {
@@ -296,16 +292,16 @@ export function resetPasswordRequest(user, dispatch) {
   });
 }
 
-function resetPasswordSuccess(user) {
+function resetPasswordSuccess (user) {
   return {
     type: RESET_PASSWORD_SUCCESS,
-    payload: user
+    payload: user,
   };
 }
 
-function resetPasswordFailure(user) {
+function resetPasswordFailure (user) {
   return {
     type: RESET_PASSWORD_FAILURE,
-    payload: user
+    payload: user,
   };
 }

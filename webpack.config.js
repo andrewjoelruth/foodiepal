@@ -2,7 +2,7 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: './client/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     loaders: [
@@ -10,8 +10,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel',
-        query: { presets: [ 'es2015', 'react' ] }
-      }
-    ]
-  }
+        query: { presets: [ 'es2015', 'react' ] },
+      },
+    ],
+  },
 };

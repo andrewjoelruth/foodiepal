@@ -1,71 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { editCategoryRequest, deleteCategoryRequest } from '../actions/index';
 
 class EditEntry extends Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       type: this.props.modalProps.category.name,
       categoryID: this.props.modalProps.category.id,
-      userID: this.props.modalProps.user.id
+      userID: this.props.modalProps.user.id,
     };
 
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  closeModal() {
+  closeModal () {
     this.props.removeModal();
   }
 
-  onTypeChange(event) {
+  onTypeChange (event) {
     this.setState({ type: event.target.value });
   }
 
-  onFormSubmit(event) {
+  onFormSubmit (event) {
     event.preventDefault();
 
     this.props.editCategoryRequest(this.state);
     this.closeModal();
   }
 
-  // TODO: remove deleted category route from react-router history.  
-  onDeleteCategory(e) {
+  // TODO: remove deleted category route from react-router history.
+  onDeleteCategory (e) {
     e.preventDefault();
 
-    var confirmDelete = confirm("Are you sure you want to delete this Categoy? It will remove all Sub-Categories and Entries that are listed under it - forever...");
+    var confirmDelete = confirm('Are you sure you want to delete this Categoy? It will remove all Sub-Categories and Entries that are listed under it - forever...');
     if (confirmDelete) {
       this.props.deleteCategoryRequest(this.state);
       this.closeModal();
     }
   }
 
-
-  render() {
+  render () {
     return (
-      <div className='modal-form-container'>
+      <div className="modal-form-container">
         <form onSubmit={ this.onFormSubmit }>
-          <input 
+          <input
             value={ this.state.type }
             onChange={ this.onTypeChange }
             type="text"
           />
-          <button type="submit" className='btn btn-primary'>Save Changes</button>
-          <button onClick={ this.onDeleteCategory.bind(this) } className='btn btn-dangerdanger'>Delete Category - Careful!!</button>
+          <button type="submit" className="btn btn-primary">Save Changes</button>
+          <button onClick={ this.onDeleteCategory.bind(this) } className="btn btn-dangerdanger">Delete Category - Careful!!</button>
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({ editCategoryRequest, deleteCategoryRequest }, dispatch);
 }
 

@@ -1,57 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { addCategoryRequest } from '../actions';
 
 class AddCategory extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
       name: '',
-      userID: this.props.auth.user._id
+      userID: this.props.auth.user._id,
     };
 
     this.onNameChange = this.onNameChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  closeModal() {
+  closeModal () {
     this.props.removeModal();
   }
 
-  onNameChange(event) {
+  onNameChange (event) {
     this.setState({ name: event.target.value });
   }
 
-  onFormSubmit(event) {
+  onFormSubmit (event) {
     event.preventDefault();
     this.props.addCategoryRequest(this.state);
     this.closeModal();
   }
 
-  render() {
+  render () {
     return (
-      <div className='modal-form-container'>
+      <div className="modal-form-container">
         <form onSubmit={ this.onFormSubmit }>
-          <input 
+          <input
             value={ this.state.name }
             onChange={ this.onNameChange.bind(this) }
-            type='text'
-            placeholder='Name'
+            type="text"
+            placeholder="Name"
           />
-          <button type='submit' className='btn btn-primary'>Add Category</button>
+          <button type="submit" className="btn btn-primary">Add Category</button>
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({ addCategoryRequest }, dispatch);
 }
 

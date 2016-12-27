@@ -1,4 +1,3 @@
-'use strict';
 
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
@@ -8,7 +7,6 @@ var opacity = require('postcss-opacity');
 var simpleVars = require('postcss-simple-vars');
 var reset = require('postcss-css-reset');
 var color = require('postcss-color-function');
-var simpleMediaQueries = require('postcss-simple-media-queries');
 var nested = require('postcss-nested');
 var map = require('postcss-map');
 var calc = require('postcss-calc');
@@ -24,7 +22,6 @@ var processors = [
   postcssImport,
   simpleVars,
   clearfix,
-  // simpleMediaQueries(settings.simpleMediaQueries),
   nested,
   custom,
   media,
@@ -32,12 +29,12 @@ var processors = [
   opacity,
   color,
   calc,
-  autoprefixer({ browsers: ["last 2 version", "safari 5", "ie > 9", "opera 12.1", "ios 6", "android 2.3"] }),
+  autoprefixer({ browsers: ['last 2 version', 'safari 5', 'ie > 9', 'opera 12.1', 'ios 6', 'android 2.3'] }),
   grid,
-  reset
+  reset,
 ];
 
-function handleError(error) {
+function handleError (error) {
   console.log(error.toString());
 
   this.emit('end');
@@ -50,13 +47,12 @@ gulp.task('css', function () {
   .pipe(gulp.dest('./client/assets/css'));
 });
 
-gulp.task('clean-css', function() {
-  return gulp.src('./client/assets/css/style.css', {read: false})
-    .pipe(clean());
+gulp.task('clean-css', function () {
+  return gulp.src('./client/assets/css/style.css', {read: false});
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch(['./client/assets/css/src/**/*.css', 'Gulpfile.js'], ['css']);
-  });
+});
 
 gulp.task('default', ['watch']);

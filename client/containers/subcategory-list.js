@@ -3,34 +3,36 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { modal } from 'react-redux-modal';
-import AddSubcategory from './add-subcategory';
+
 import { iconList } from '../assets/img/icon-catalogue';
 import {
   getCurrentCategory,
   getSubcategoriesRequest,
-  setCurrentSubcategory
+  setCurrentSubcategory,
 } from '../actions';
 
+import AddSubcategory from './add-subcategory';
+
 class SubcategoryList extends Component {
-  componentWillMount() {
+  componentWillMount () {
     this.props.getSubcategoriesRequest(this.props.current.category.id);
   }
 
-  setSubcategory(subcategory) {
+  setSubcategory (subcategory) {
     this.props.setCurrentSubcategory(subcategory);
   }
 
-  openEntryForm(e) {
+  openEntryForm (e) {
     e.preventDefault();
 
     modal.add(AddSubcategory, {
       title: 'Add New Variety',
       closeOnOutsideClick: true,
-      hideCloseButton: false
+      hideCloseButton: false,
     });
   }
 
-  renderSubcategories() {
+  renderSubcategories () {
     if (this.props.current.category.id === 1) {
       return (
         <div></div>
@@ -40,7 +42,7 @@ class SubcategoryList extends Component {
     const category = this.props.current.category.name;
     const subcategories = this.props.subcategories.data;
 
-    let categoryClassName = category.replace(/(\s+?)/g,"-").toLowerCase();
+    let categoryClassName = category.replace(/(\s+?)/g,'-').toLowerCase();
     if (categoryClassName[categoryClassName.length-1] === 's') {
       categoryClassName = categoryClassName.substring(0, categoryClassName.length - 1);
     }
@@ -49,9 +51,9 @@ class SubcategoryList extends Component {
       let subcategoryInfo = {
         id: subcategory._id,
         name: subcategory.name,
-        description: subcategory.description
+        description: subcategory.description,
       };
-      let subcategoryName = subcategory.name.replace(/(\s+?)/g,"-").toLowerCase();
+      let subcategoryName = subcategory.name.replace(/(\s+?)/g,'-').toLowerCase();
       if (subcategoryName[subcategoryName.length-1] === 's') {
         subcategoryName = subcategoryName.substring(0, subcategoryName.length - 1);
       }
@@ -61,18 +63,18 @@ class SubcategoryList extends Component {
       } else {
         thisClassName = categoryClassName;
       }
-      if (iconList.indexOf(thisClassName) == -1) {
+      if (iconList.indexOf(thisClassName) === -1) {
         thisClassName = 'default';
       }
 
       return (
-        <li key={ subcategory._id } className='grid-links-block'>
+        <li key={ subcategory._id } className="grid-links-block">
           <Link
-            to={`/u/${ category }/${ subcategory.name }`}
+            to={ `/u/${ category }/${ subcategory.name }` }
             onClick={ () => this.setSubcategory(subcategoryInfo) }>
             <div className="grid-link-container">
               <div className={ `grid-link-icon grid-link-icon-${ thisClassName }` }></div>
-              <span className='grid-link-name'>{ subcategory.name }</span>
+              <span className="grid-link-name">{ subcategory.name }</span>
             </div>
           </Link>
         </li>
@@ -80,20 +82,20 @@ class SubcategoryList extends Component {
     });
   }
 
-  renderAddNewButtonGrid() {
+  renderAddNewButtonGrid () {
     return (
-      <li key='add-subcategory' className='grid-links-block'>
-        <Link to='#' onClick={ this.openEntryForm.bind(this) }>
+      <li key="add-subcategory" className="grid-links-block">
+        <Link to="#" onClick={ this.openEntryForm.bind(this) }>
           <div className="grid-link-container">
-            <div className='grid-link-icon'>+</div>
-            <span className='grid-link-name'>Add New</span>
+            <div className="grid-link-icon">+</div>
+            <span className="grid-link-name">Add New</span>
           </div>
         </Link>
       </li>
     );
   }
 
-  renderAddNewBlock() {
+  renderAddNewBlock () {
     if (this.props.current.category.id === 1) {
       return (
         <div></div>
@@ -103,22 +105,22 @@ class SubcategoryList extends Component {
     let categoryName = this.props.current.category.name.toLowerCase();
 
     return (
-      <div className='add-new-block'>
+      <div className="add-new-block">
         <h4>Got some { categoryName } to try?</h4>
         <p>You haven't added any types of { categoryName }.</p>
-        <Link to='#' onClick={ this.openEntryForm.bind(this) }>
-          <button className='btn btn-primary'>Add New Variety</button>
-          
+        <Link to="#" onClick={ this.openEntryForm.bind(this) }>
+          <button className="btn btn-primary">Add New Variety</button>
+
         </Link>
       </div>
     );
   }
 
-  render() {
+  render () {
     return (
-      <div className='grid-container'>
-        <ul className='grid-links'>
-          { !this.props.subcategories.isFetching ? this.renderSubcategories() : <div className='spinner'></div> }
+      <div className="grid-container">
+        <ul className="grid-links">
+          { !this.props.subcategories.isFetching ? this.renderSubcategories() : <div className="spinner"></div> }
           { !this.props.subcategories.isFetching && this.props.subcategories.data.length ? this.renderAddNewButtonGrid() : '' }
         </ul>
         { !this.props.subcategories.isFetching && !this.props.subcategories.data.length ? this.renderAddNewBlock() : '' }
@@ -127,15 +129,15 @@ class SubcategoryList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return state;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return bindActionCreators({
     getCurrentCategory,
     getSubcategoriesRequest,
-    setCurrentSubcategory
+    setCurrentSubcategory,
   }, dispatch);
 }
 

@@ -1,11 +1,10 @@
 import { reduxForm } from 'redux-form';
+
 import ResetPassword from '../components/resetpw.js';
 import { setUserID, resetPasswordRequest } from '../actions/auth.js';
 
-
-
 //Client side validation
-function validate(values) {
+function validate (values) {
   var errors = {};
   var hasErrors = false;
 
@@ -27,28 +26,26 @@ function validate(values) {
     errors.password = 'Password And Re-entered Password don\'t match';
     hasErrors = true;
   }
-  
+
   return hasErrors && errors;
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     resetPassword: resetPasswordRequest,
-    sendUserID: setUserID
+    sendUserID: setUserID,
   };
-};
+}
 
-function mapStateToProps(state, ownProps) {
-  return { 
+function mapStateToProps (state, ownProps) {
+  return {
     user: state.user,
-    validateFields: state.validateFields
+    validateFields: state.validateFields,
   };
-};
-
+}
 
 export default reduxForm({
   form: 'ResetPassword',
   fields: ['email', 'password', 'confirmPassword'],
-  validate 
+  validate,
 }, mapStateToProps, mapDispatchToProps)(ResetPassword);
-
