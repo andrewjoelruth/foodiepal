@@ -51,7 +51,7 @@ class Subcategory extends Component {
       </ReactCSS>
     );
   }
-
+}
 
 function mapStateToProps (state) {
   return state;
