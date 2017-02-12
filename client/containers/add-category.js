@@ -17,6 +17,10 @@ class AddCategory extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
+  componentDidMount () {
+    this.nameInput.focus();
+  }
+
   closeModal () {
     this.props.removeModal();
   }
@@ -38,8 +42,10 @@ class AddCategory extends Component {
           <input
             value={ this.state.name }
             onChange={ this.onNameChange.bind(this) }
+            ref={ (input) => { this.nameInput = input; } }
             type="text"
             placeholder="Name"
+            defaultValue="will focus"
           />
           <button type="submit" className="btn btn-primary">Add Category</button>
         </form>

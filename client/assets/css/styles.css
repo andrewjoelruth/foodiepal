@@ -742,6 +742,9 @@ footer {
 .grid-link-icon-ale {
   background-image: url('../img/img2/ale.svg');
 }
+.grid-link-icon-bacon {
+  background-image: url('../img/img2/bacon.svg');
+}
 .grid-link-icon-berry {
   background-image: url('../img/img2/berry.svg');
 }
@@ -867,6 +870,9 @@ footer {
 }
 .grid-link-icon-milk {
   background-image: url('../img/img2/milks.svg');
+}
+.grid-link-icon-mix {
+  background-image: url('../img/img2/mix.svg');
 }
 .grid-link-icon-mushroom {
   background-image: url('../img/img2/mushrooms.svg');
