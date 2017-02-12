@@ -12,6 +12,10 @@ import EditSubcategory from './edit-subcategory';
 
 class Detail extends Component {
 
+  componentDidUpdate () {
+    window.scrollTo(0,0);
+  }
+
   openEntryForm (subcategory) {
     modal.add(AddEntry, {
       title: 'Add Entry',
