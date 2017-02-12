@@ -68,6 +68,7 @@ const iconList = [
   'preserve',
   'produce',
   'prosecco',
+  'ramen',
   'red-wine',
   'sake',
   'salt',
@@ -93,6 +94,7 @@ const iconList = [
   'wheat-beer',
   'white-wine',
   'wine',
+  'yogurt',
   'default',
 ];
 
