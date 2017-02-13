@@ -24,6 +24,10 @@ class EditEntry extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
+  componentDidMount () {
+    this.nameInput.focus();
+  }
+
   closeModal () {
     this.props.removeModal();
   }
@@ -68,6 +72,8 @@ class EditEntry extends Component {
             value={ this.state.type }
             onChange={ this.onTypeChange }
             type="text"
+            ref={ (input) => { this.nameInput = input; } }
+            defaultValue="will focus"
           />
           <textarea
             value={ this.state.notes }

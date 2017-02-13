@@ -21,6 +21,10 @@ class EditSubcategory extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
+  componentDidMount () {
+    this.nameInput.focus();
+  }
+
   closeModal () {
     this.props.removeModal();
   }
@@ -58,6 +62,8 @@ class EditSubcategory extends Component {
             value={ this.state.name }
             onChange={ this.onNameChange }
             type="text"
+            ref={ (input) => { this.nameInput = input; } }
+            defaultValue="will focus"
           />
           <textarea
             value={ this.state.description }

@@ -519,6 +519,10 @@ footer {
   background-image: url('../img/img2/ale.svg');
 }
 
+.grid-link-icon-bacon {
+  background-image: url('../img/img2/bacon.svg');
+}
+
 .grid-link-icon-berry {
   background-image: url('../img/img2/berry.svg');
 }
@@ -687,6 +691,10 @@ footer {
   background-image: url('../img/img2/milks.svg');
 }
 
+.grid-link-icon-mix {
+  background-image: url('../img/img2/mix.svg');
+}
+
 .grid-link-icon-mushroom {
   background-image: url('../img/img2/mushrooms.svg');
 }
@@ -751,6 +759,10 @@ footer {
   background-image: url('../img/img2/salad.svg');
 }
 
+.grid-link-icon-ramen {
+  background-image: url('../img/img2/noodles.svg');
+}
+
 .grid-link-icon-red-wine {
   background-image: url('../img/wine.svg');
 }
@@ -784,7 +796,7 @@ footer {
 }
 
 .grid-link-icon-soup {
-  background-image: url('../img/img2/noodles.svg');
+  background-image: url('../img/img2/soup.svg');
 }
 
 .grid-link-icon-spread {
@@ -845,6 +857,10 @@ footer {
 
 .grid-link-icon-white-wine {
   background-image: url('../img/img2/white-wine.ico');
+}
+
+.grid-link-icon-yogurt {
+  background-image: url('../img/img2/yogurt.svg');
 }
 
 .react-rater {

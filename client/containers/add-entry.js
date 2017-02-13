@@ -23,6 +23,10 @@ class AddEntry extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
+  componentDidMount () {
+    this.nameInput.focus();
+  }
+
   closeModal () {
     this.props.removeModal();
   }
@@ -57,6 +61,8 @@ class AddEntry extends Component {
             onChange={ this.onTypeChange }
             type="text"
             placeholder="Type"
+            ref={ (input) => { this.nameInput = input; } }
+            defaultValue="will focus"
           />
           <textarea
             value={ this.state.notes }

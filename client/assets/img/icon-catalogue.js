@@ -1,5 +1,6 @@
 const iconList = [
   'ale',
+  'bacon',
   'beef',
   'beer',
   'berry',
@@ -47,6 +48,7 @@ const iconList = [
   'mead',
   'meat',
   'milk',
+  'mix',
   'mushroom',
   'nut',
   'nuts-and-seed',
@@ -54,6 +56,7 @@ const iconList = [
   'olive',
   'olive-oil',
   'pan',
+  'pasta',
   'pastry',
   'pepper',
   'pickled',
@@ -65,6 +68,7 @@ const iconList = [
   'preserve',
   'produce',
   'prosecco',
+  'ramen',
   'red-wine',
   'sake',
   'salt',
@@ -90,6 +94,7 @@ const iconList = [
   'wheat-beer',
   'white-wine',
   'wine',
+  'yogurt',
   'default',
 ];
 
