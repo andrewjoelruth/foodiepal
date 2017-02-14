@@ -19,6 +19,10 @@ class Subcategory extends Component {
     });
   }
 
+  componentDidUpdate () {
+    window.scrollTo(0,0);
+  }
+
   render () {
 
     if (this.props.current.category.id === 1) {

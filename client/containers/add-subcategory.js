@@ -19,6 +19,10 @@ class AddSubcategory extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
+  componentDidMount () {
+    this.nameInput.focus();
+  }
+
   closeModal () {
     this.props.removeModal();
   }
@@ -47,6 +51,8 @@ class AddSubcategory extends Component {
             onChange={ this.onNameChange.bind(this) }
             type="text"
             placeholder="Name"
+            ref={ (input) => { this.nameInput = input; } }
+            defaultValue="will focus"
           />
           <textarea
             value={ this.state.description }
